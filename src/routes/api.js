@@ -1,4 +1,5 @@
 const express = require('express');
+const { creatUser } = require('../controllers/userController');
 
 const routerAPI = express.Router();
 
@@ -18,5 +19,7 @@ routerAPI.get('/test-api', (req, res) => {
         message: 'Hello from API'
     })
 });
+
+routerAPI.post('/register', creatUser);
 
 module.exports = routerAPI; //export default
