@@ -1,5 +1,5 @@
 const express = require('express');
-const { creatUser } = require('../controllers/userController');
+const { creatUser, handleLogin } = require('../controllers/userController');
 
 const routerAPI = express.Router();
 
@@ -21,5 +21,6 @@ routerAPI.get('/test-api', (req, res) => {
 });
 
 routerAPI.post('/register', creatUser);
+routerAPI.get('/login', handleLogin);
 
 module.exports = routerAPI; //export default

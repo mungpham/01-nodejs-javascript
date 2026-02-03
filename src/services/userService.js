@@ -21,6 +21,34 @@ const createUserService = async ({name, email, password}) => {
     }
 }
 
+const loginService = async ({email, password}) => {
+  try {
+    const user = await User.findOne({ email: email });
+    if (user) {
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (isPasswordValid) {
+        //create a token (JWT)
+        return "Login successful";
+      } else {
+        return {
+          EC: 2,
+          EM: 'Email/Password is incorrect',
+        }
+      }
+    } else {
+      return {
+        EC: 1,
+        EM: 'Email/Password is incorrect',
+      }
+    }
+  }
+  catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
 module.exports = {
-  createUserService
+  createUserService,
+  loginService
 }
